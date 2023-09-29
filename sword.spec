@@ -148,8 +148,8 @@ make tests
 %{python3_sitearch}/sword-%{version}-py%{python3_version}.egg-info
 
 %files -n perl-sword
-%{perl_vendorarch}/Sword.pm
-%exclude %{perl_vendorarch}/auto/*
+%{perl_vendorarch}/*
+%exclude %dir %{perl_vendorarch}/auto/
 
 
 %changelog
