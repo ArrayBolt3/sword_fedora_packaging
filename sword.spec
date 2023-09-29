@@ -1,5 +1,4 @@
 %global         soversion 1.9
-%global         pkg_version 1.9.0
 
 Name:           sword
 Epoch:          1
@@ -11,14 +10,16 @@ URL:            http://www.crosswire.org/sword/
 Source0:        sword-1.9.0.tar.gz
 Source1:        sword_gen_free_tarball.sh
 Source2:        LICENSE_README
+Patch0:         cmake-perl-bindings.diff
+Patch1:         migrate-to-setuptools.diff
 BuildRequires:  make
 BuildRequires:  cmake
-BuildRequires:  cmake-data
 BuildRequires:  openssl-devel
 BuildRequires:  curl-devel
 BuildRequires:  zlib-devel
 BuildRequires:  libidn-devel
-BuildRequires:  libicu-devel icu
+BuildRequires:  libicu-devel
+BuildRequires:  icu
 BuildRequires:  clucene-core-devel
 BuildRequires:  cppunit-devel
 BuildRequires:  swig
@@ -28,9 +29,6 @@ BuildRequires:  perl-devel
 BuildRequires:  perl-generators
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
-
-Patch0:         cmake-perl-bindings.diff
-Patch1:         migrate-to-setuptools.diff
 
 %description
 The SWORD Project is the CrossWire Bible Society's free Bible software
@@ -88,8 +86,7 @@ Perl bindings for The SWORD Library.
 %prep
 %setup -q
 
-%patch -P0 -p1 -b .perl
-%patch -P1 -p1
+%autosetup -p1
 
 %build
 %cmake -DLIBSWORD_LIBRARY_TYPE=Shared \
@@ -107,18 +104,17 @@ Perl bindings for The SWORD Library.
 %cmake_install
 mkdir -p %{buildroot}%{_datadir}/sword/modules
 
-find %{buildroot} -type f -name "*.la" -delete -print
-
 %check
 make tests
 
 %files
-%doc AUTHORS COPYING ChangeLog LICENSE NEWS README
+%doc AUTHORS ChangeLog NEWS README
 %doc samples doc
+%license COPYING LICENSE
 # Re-enable after upstream includes it with CMake builds
 %config(noreplace) %{_sysconfdir}/sword.conf
 %{_libdir}/libsword.so.%{soversion}
-%{_datadir}/sword
+%{_datadir}/sword/
 
 %files devel
 %doc CODINGSTYLE
@@ -149,7 +145,7 @@ make tests
 %files -n python3-sword
 %pycached %{python3_sitearch}/Sword.py
 %{python3_sitearch}/_Sword%{python3_ext_suffix}
-%{python3_sitearch}/sword-%{pkg_version}-py%{python3_version}.egg-info
+%{python3_sitearch}/sword-%{version}-py%{python3_version}.egg-info
 
 %files -n perl-sword
 %{perl_vendorarch}/*
