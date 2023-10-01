@@ -109,7 +109,8 @@ make tests
 
 %files
 %doc AUTHORS ChangeLog NEWS README
-%doc samples doc
+%doc samples/
+%doc doc/
 %license COPYING LICENSE
 # Re-enable after upstream includes it with CMake builds
 %config(noreplace) %{_sysconfdir}/sword.conf
@@ -145,7 +146,7 @@ make tests
 %files -n python3-sword
 %pycached %{python3_sitearch}/Sword.py
 %{python3_sitearch}/_Sword%{python3_ext_suffix}
-%{python3_sitearch}/sword-%{version}-py%{python3_version}.egg-info
+%{python3_sitearch}/sword-%{version}-py%{python3_version}.egg-info/
 
 %files -n perl-sword
 %{perl_vendorarch}/*
