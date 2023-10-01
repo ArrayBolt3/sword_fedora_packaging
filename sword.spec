@@ -86,8 +86,6 @@ Requires: perl-HTML-Strip
 Perl bindings for The SWORD Library.
 
 %prep
-%setup -q
-
 %autosetup -p1
 
 %build
