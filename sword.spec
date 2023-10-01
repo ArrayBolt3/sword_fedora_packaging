@@ -43,7 +43,9 @@ texts in over 50 languages.
 Summary:  Development files for the sword project
 Requires: %{name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires: pkgconfig
-Requires: curl-devel clucene-core-devel libicu-devel
+Requires: curl-devel
+Requires: clucene-core-devel
+Requires: libicu-devel
 
 %description devel
 This package contains the development headers and libraries for the
