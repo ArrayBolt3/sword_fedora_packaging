@@ -65,17 +65,15 @@ release schedule of the library. However, these utilities were the
 latest at the time of the current library release.
 
 %package -n python3-sword
-%{?python_provide:%python_provide python3-sword}
+%py_provides python3-sword
 Summary: Python bindings for Sword
 Requires: %{name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires: python3
-%py_provides python3-Sword
 
 %description -n python3-sword
 Python bindings for The SWORD Library.
 
 %package -n perl-sword
-%{?perl_provide:%perl_provide perl-sword}
 Summary: Perl bindings for Sword
 Requires: %{name}%{?_isa} = %{epoch}:%{version}-%{release}
 Requires: perl-interpreter
